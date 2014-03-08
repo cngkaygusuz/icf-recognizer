@@ -7,13 +7,13 @@
 using namespace std;
 using namespace cv;
 
-void gradient_orientation(Mat& source, Mat& destination, bool quadrant_aware, int lower_bound, int upper_bound){
+void gradient_orientation(Mat& source, Mat& destination, int lower_bound, int upper_bound){
     int scale = 1;
     int delta = 0;
     int ddepth = CV_16S;
 
-    lower_bound = quadrant_aware ? lower_bound % 180 : lower_bound % 360;
-    upper_bound = quadrant_aware ? upper_bound % 180 : upper_bound % 360;
+    lower_bound = lower_bound % 180;
+    upper_bound = upper_bound % 180; 
 
     Mat grad_x;
     Mat grad_y;
@@ -39,10 +39,7 @@ void gradient_orientation(Mat& source, Mat& destination, bool quadrant_aware, in
         double radian = atan2((double)piy[i], (double) pix[i]);
         int deg = (int)(radian / M_PI * 180);
         
-        if (quadrant_aware && deg < 0){
-            deg += 360;
-        }
-        else if (!quadrant_aware && deg < 0){
+        if (deg < 0){
             deg = 180-deg;
         }
         
@@ -50,6 +47,26 @@ void gradient_orientation(Mat& source, Mat& destination, bool quadrant_aware, in
             dst[i] = 255;
         }
     }
+    
+    //medianBlur(destination, destination, 3);
+
+
+}
+
+void gradient_magnitude(Mat& source, Mat& destination){
+    Mat grad_x;
+    Mat grad_y;
+    Mat gray;
+
+    cvtColor(source, gray, CV_RGB2GRAY);
+    
+    Sobel(gray, grad_x, CV_16S, 1, 0, 3);
+    convertScaleAbs(grad_x, grad_x);
+    Sobel(gray, grad_y, CV_16S, 0, 1, 3);
+    convertScaleAbs(grad_y, grad_y);
+
+    addWeighted(grad_x, 0.5, grad_y, 0.5, 0, destination);
+    destination.convertTo(destination, CV_8U);
 }
 
 int main(int argc, char** argv){
@@ -69,12 +86,19 @@ int main(int argc, char** argv){
 
     //cout << format(picture_gray, "python") << endl;
 
+    Mat grad_mag;
+    gradient_magnitude(picture, grad_mag);
+
     Mat orn;
     namedWindow("Orientation", CV_WINDOW_AUTOSIZE);
 
-    for (int i=0; i<8; i++){
-        gradient_orientation(picture, orn, false, 22.5*i-5, 22.5*i+5);
+    imshow("Orientation", grad_mag);
+    waitKey(0);
 
+    for (int i=0; i<8; i++){
+        gradient_orientation(picture, orn, 22.5*i-5, 22.5*i+5);
+        bitwise_and(grad_mag, orn, orn);
+        
         imshow("Orientation", orn);
         waitKey(0);
     }

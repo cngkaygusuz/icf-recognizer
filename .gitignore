@@ -14,3 +14,14 @@
 
 # CMake Directory
 cmake
+
+# Python
+*.pyc
+
+# IDE
+.idea
+
+# Static files
+*.ppm
+*.png
+GTSRB
