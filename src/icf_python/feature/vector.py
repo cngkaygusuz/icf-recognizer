@@ -1,1 +1,3 @@
-__author__ = 'kanapka'
+import stub
+
+if __name__ == '__main__'
