@@ -80,6 +80,12 @@ def get_channels(image):
 
     return channels
 
+
+def get_integral_channels(channels):
+    int_chn = map(lambda it: cv2.integral(it), channels)
+    return int_chn
+
+
 if __name__ == '__main__':
     img = cv2.imread('sign.ppm')
 
