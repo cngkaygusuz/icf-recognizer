@@ -17,8 +17,8 @@ COLLISION_LIMIT = 500
 #   Width
 
 
-def generate(seed_value):
-
+def generate(seed_value=None, uniq_features=UNIQUE_FEATURE_COUNT):
+    
     if seed_value:
         random.seed(seed_value)
 
@@ -43,7 +43,7 @@ def generate(seed_value):
 
         if failures == COLLISION_LIMIT:
             raise Exception('Collision limit reached')
-        elif features == UNIQUE_FEATURE_COUNT:
+        elif features == uniq_features:
             break
 
     return feature_dict.keys()
