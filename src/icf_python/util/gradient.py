@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-from misc import show
 
 GRAD_DDEPTH = cv2.CV_16S
 ORIENTATION_DEGREES = [15, 45, 75, 105, 135, 165]

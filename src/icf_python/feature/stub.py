@@ -17,7 +17,11 @@ COLLISION_LIMIT = 500
 #   Width
 
 
-def generate_canditate_features():
+def generate(seed_value):
+
+    if seed_value:
+        random.seed(seed_value)
+
     feature_dict = {}
     features = 0
     failures = 0
@@ -42,10 +46,10 @@ def generate_canditate_features():
         elif features == UNIQUE_FEATURE_COUNT:
             break
 
-    return feature_dict
+    return feature_dict.keys()
 
 
-def read_feature_vector(filename):
+def read(filename):
     with open(filename, 'r') as fil:
         data = fil.read()
         data = data.split('\n')
@@ -53,16 +57,15 @@ def read_feature_vector(filename):
     return data
 
 
-def write_feature_vector(feature_dict, filename):
+def write(stubs, filename):
     with open(filename, 'w') as fil:
-        keys = feature_dict.keys()
-        for key in keys:
-            fea = '%s %s %s %s %s\n' % (key[0], key[1], key[2], key[3], key[4])
+        for stu in stubs:
+            fea = '%s %s %s %s %s\n' % (stu[0], stu[1], stu[2], stu[3], stu[4])
             fil.write(fea)
 
 
 if __name__ == '__main__':
-    f = generate_canditate_features()
-    write_feature_vector(f, 'canditate.vec')
-    fvec = read_feature_vector('canditate.vec')
+    f = generate()
+    write(f, 'canditate.vec')
+    fvec = read('canditate.vec')
     print fvec

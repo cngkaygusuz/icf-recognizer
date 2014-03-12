@@ -1,7 +1,4 @@
-import stub
-
-
-def calculate_features(integral_channels, feature_stubs):
+def extract(integral_channels, feature_stubs):
     features = []
     for stub in feature_stubs:
         ch, p_x, p_y, he, wi = stub
