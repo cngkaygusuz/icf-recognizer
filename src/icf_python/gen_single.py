@@ -3,12 +3,14 @@ import argparse
 
 import cv2
 
+from util.constants import *
 import feature.stub as stub
 import feature.vector as vector
 import util.gradient as grad
 
 
 def single(image, vector_stub):
+    image = cv2.resize(image, (ISOLATED_DIM_X, ISOLATED_DIM_Y), None, 0, 0, cv2.INTER_CUBIC)
     chan = grad.get_channels(image)
     int_chan = grad.get_integral_channels(chan)
     feats = vector.extract(int_chan, vector_stub)

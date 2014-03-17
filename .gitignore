@@ -27,3 +27,4 @@ cmake
 GTSRB
 dataset
 *.vec
+data

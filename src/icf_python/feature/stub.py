@@ -53,7 +53,10 @@ def read(filename):
     with open(filename, 'r') as fil:
         data = fil.read()
         data = data.split('\n')
+        data.pop()
+
         data = map(lambda it: it.split(' '), data)
+        data = map(lambda it: map(lambda el: int(el), it), data)
     return data
 
 

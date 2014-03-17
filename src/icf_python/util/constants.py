@@ -9,3 +9,14 @@ PROHIBITORY_CLASS = 1
 MANDATORY_CLASS = 2
 DANGER_CLASS = 3
 OTHER_CLASS = 0
+
+
+def get_class(class_no):
+    if class_no in PROHIBITORY:
+        return PROHIBITORY_CLASS
+    elif class_no in MANDATORY:
+        return MANDATORY_CLASS
+    elif class_no in DANGER:
+        return DANGER_CLASS
+    else:
+        return OTHER_CLASS
