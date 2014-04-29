@@ -10,7 +10,7 @@ from util.misc import slide
 import feature.stub as stub
 import util.gradient as grad
 
-TRAINING_DATASET_PATH = '/home/kanapka/workspace/junior-proje/dataset/detection-training'
+TRAINING_DATASET_PATH = '/home/cengiz/Desktop/cengizdata/junior-proje/dataset/detection-training'
 
 
 def generate_from_training(output_filepath, vector_stub_path):
@@ -20,6 +20,14 @@ def generate_from_training(output_filepath, vector_stub_path):
     vec_stub = stub.read(vector_stub_path)
 
     with open(output_filepath, 'w') as output:
+        output.write('name,')
+
+        for s in vec_stub:
+            tmp = "({} {} {} {} {}),".format(*s)
+            output.write(tmp)
+
+        output.write('class')
+        output.write('\n')
 
         for root, dirs, files in dir_structure:
             dir_no = root[-2:]
@@ -37,11 +45,9 @@ def generate_from_training(output_filepath, vector_stub_path):
 
 
 def generate_negatives(image, output_filepath):
-
     with open(output_filepath, 'w') as output:
         chan = grad.get_channels(image)
         int_chan = grad.get_integral_channels(chan)
-
 
 
 if __name__ == '__main__':

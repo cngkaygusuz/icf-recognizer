@@ -17,8 +17,11 @@ COLLISION_LIMIT = 500
 #   Width
 
 
-def generate(seed_value=None, uniq_features=UNIQUE_FEATURE_COUNT):
-    
+def generate(seed_value=None, uniq_features=None):
+
+    if not uniq_features:
+        uniq_features = UNIQUE_FEATURE_COUNT
+
     if seed_value:
         random.seed(seed_value)
 
