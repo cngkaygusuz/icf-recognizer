@@ -1,9 +1,7 @@
 import argparse
-import cv2
 
 from util.misc import slide
-from gen_single import single
-from feature.stub import read
+from icf_python.toolbox.native.gen_single import single
 
 
 def negatives(image, sample_name, vector_stub, output_file):

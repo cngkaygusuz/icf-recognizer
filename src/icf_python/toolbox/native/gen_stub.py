@@ -20,7 +20,7 @@ if __name__ == '__main__':
     parser.add_argument('--features', '-f', type=int, help='Number of the stubs wanted')
 
     args = parser.parse_args()
-    gsu = stub.generate(args.seed_value, args.features)
+    gsu = stub.generate(seed_value=args.seed_value, uniq_features=args.features)
 
     if args.output:
         stub.write(gsu, args.output)

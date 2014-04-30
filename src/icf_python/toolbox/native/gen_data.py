@@ -4,11 +4,11 @@ import os
 
 import cv2
 
-from gen_single import single
+from icf_python.toolbox.native.gen_single import single
 from util.misc import get_class
-from util.misc import slide
 import feature.stub as stub
 import util.gradient as grad
+
 
 TRAINING_DATASET_PATH = '/home/cengiz/Desktop/cengizdata/junior-proje/dataset/detection-training'
 
