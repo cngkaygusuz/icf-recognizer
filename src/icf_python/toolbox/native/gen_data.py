@@ -5,9 +5,9 @@ import os
 import cv2
 
 import icf_python.toolbox.native.gen_single as single
-from util.misc import get_class
+from misc.misc import get_class
 import feature.stub as stub
-import util.gradient as grad
+import misc.gradient as grad
 
 
 TRAINING_DATASET_PATH = '/home/cengiz/Desktop/cengizdata/junior-proje/dataset/detection-training'

@@ -3,10 +3,10 @@ import argparse
 
 import cv2
 
-from util.constants import *
+from misc.constants import *
 import feature.stub as stub
 import feature.vector as vector
-import util.gradient as grad
+import misc.gradient as grad
 
 
 def main(image, vector_stub):

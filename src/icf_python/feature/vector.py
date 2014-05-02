@@ -13,3 +13,21 @@ def extract(integral_channels, feature_stubs):
         features.append(fea)
 
     return features
+
+
+def read(filepath):
+    with open(filepath, "r") as fil:
+        data = fil.read()
+        data = data.split('\n')
+
+    column_ids = data.pop(0)
+    data = zip(*data)
+
+    pics = data.pop(0)
+    data = zip(*data)
+
+    vectors = {}
+    for i, pic in enumerate(pics):
+        vectors[pic] = data[i]
+
+    return vectors, column_ids

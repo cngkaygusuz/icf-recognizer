@@ -1,6 +1,6 @@
 import argparse
 
-from util.misc import slide
+from misc.misc import slide
 import icf_python.toolbox.native.gen_single as single
 
 

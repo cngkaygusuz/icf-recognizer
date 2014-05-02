@@ -1,4 +1,4 @@
-from icf_python.util.constants import *
+from misc.constants import *
 import random
 
 CHANNEL_COUNT = 10
