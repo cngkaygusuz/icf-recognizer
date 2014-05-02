@@ -4,7 +4,7 @@ import os
 
 import cv2
 
-from icf_python.toolbox.native.gen_single import single
+import icf_python.toolbox.native.gen_single as single
 from util.misc import get_class
 import feature.stub as stub
 import util.gradient as grad
@@ -37,7 +37,7 @@ def generate_from_training(output_filepath, vector_stub_path):
             for file in files:
                 img = cv2.imread('%s/%s' % (root, file))
 
-                features = single(img, vec_stub)
+                features = single.main(img, vec_stub)
                 features = map(lambda it: str(it), features)
 
                 features_printy = '%s-%s, ' % (dir_no, file) + ', '.join(features) + ', %d' % class_no + '\n'

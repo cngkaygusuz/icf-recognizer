@@ -1,13 +1,13 @@
 import argparse
 
 from util.misc import slide
-from icf_python.toolbox.native.gen_single import single
+import icf_python.toolbox.native.gen_single as single
 
 
 def negatives(image, sample_name, vector_stub, output_file):
 
     for i, subimg in enumerate(slide(image, (60, 60), (60, 60), 0, 0)):
-        feats = single(image, vector_stub)
+        feats = single.main(image, vector_stub)
         feats = map(lambda it: str(it), feats)
 
         f_printy = "%s-%d" % (sample_name, i) + ', '.join(feats), ', -1' + '\n'

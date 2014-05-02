@@ -9,7 +9,7 @@ import feature.vector as vector
 import util.gradient as grad
 
 
-def single(image, vector_stub):
+def main(image, vector_stub):
     image = cv2.resize(image, (ISOLATED_DIM_X, ISOLATED_DIM_Y), None, 0, 0, cv2.INTER_CUBIC)
     chan = grad.get_channels(image)
     int_chan = grad.get_integral_channels(chan)
@@ -26,5 +26,5 @@ if __name__ == '__main__':
     img = cv2.imread(args.image_path)
     vec_stu = stub.read(args.vector_stub_path)
 
-    feats = single(img, vec_stu)
+    feats = main(img, vec_stu)
     print feats
