@@ -4,13 +4,13 @@ import os
 
 import cv2
 
-import icf_python.toolbox.native.gen_single as single
+import toolbox.native.gen_single as single
 from misc.misc import get_class
 import feature.stub as stub
 import misc.gradient as grad
 
 
-TRAINING_DATASET_PATH = '/home/cengiz/Desktop/cengizdata/junior-proje/dataset/detection-training'
+TRAINING_DATASET_PATH = '/home/cengiz/Desktop/misc/cengizdata/junior-proje/dataset/detection-training'
 
 
 def generate_from_training(output_filepath, vector_stub_path):
