@@ -1,6 +1,24 @@
+#! -*- coding: UTF-8 -*-
+
+
+"""
+This module is concerned with computing, serialization and deserialization of the dataset formed from vector stubs and
+training images.
+"""
+
+
 import sys
 
+
 def extract(integral_channels, feature_stubs):
+    """
+    Calculates the feature values.
+
+    :param integral_channels:   Integral channels of an image.
+    :param feature_stubs:       Feature stubs.
+
+    """
+
     features = []
     for stub in feature_stubs:
         ch, p_x, p_y, he, wi = stub
@@ -18,6 +36,12 @@ def extract(integral_channels, feature_stubs):
 
 
 def read(filepath):
+    """
+    Reads the dataset.
+
+    :param filepath: Path to the dataset.
+    :returns Feature vectors and the features stub.
+    """
     with open(filepath, "r") as fil:
         data = fil.read()
         data = data.split('\n')
@@ -36,6 +60,14 @@ def read(filepath):
 
 
 def write(feature_vectors, stub, output_path=None):
+    """
+    Writes the dataset
+
+    :param feature_vectors: Computed features.
+    :param stub: Stub used in computing features.
+    :param output_path: The file to be written. If left blank, defaults to stdout.
+    """
+
     if not output_path:
         stream = sys.stdout
     else:
@@ -54,8 +86,11 @@ def write(feature_vectors, stub, output_path=None):
 
 def binarize(feature_vectors, class_id):
     """
-    Set the given class_id to positive sample and rest negative
-    Returns nothing, does it in place.
+    Set the given class_id to positive sample and rest negative.
+    Does it in place.
+
+    :param feature_vectors: The dataset.
+    :param class_id: Class id to be marked as positive.
     """
     for key in feature_vectors:
         if feature_vectors[key][-1] == class_id:
@@ -65,10 +100,20 @@ def binarize(feature_vectors, class_id):
 
 
 def convert_int(feature_vectors):
+    """
+    Converts the feature set values to int.
+    :param feature_vectors: The dataset.
+    :return: Nothing, does it in place.
+    """
     for key in feature_vectors:
         feature_vectors[key] = map(lambda el: int(el), feature_vectors[key])
 
 
 def convert_str(feature_vectors):
+    """
+    Converts the feature set values to string.
+    :param feature_vectors: The dataset.
+    :return: Nothing, does it in place.
+    """
     for key in feature_vectors:
         feature_vectors[key] = map(lambda el: str(el), feature_vectors[key])
