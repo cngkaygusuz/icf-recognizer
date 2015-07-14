@@ -1,17 +1,28 @@
+#! -*- coding: UTF-8 -*-
+
+"""
+This module contains routines for computing channels.
+"""
+
 import cv2
 import numpy as np
 
-
-GRAD_DDEPTH = cv2.CV_16S
-ORIENTATION_DEGREES = [15, 45, 75, 105, 135, 165]
-ORIENTATION_BIN = 14
+GRAD_DDEPTH = cv2.CV_16S  # Word size for gradient channels.
+ORIENTATION_DEGREES = [15, 45, 75, 105, 135, 165]  # Central degrees for gradient orientation channels.
+ORIENTATION_BIN = 14  # Bin size for orientation channels.
 
 
 def oriented_gradient(grad_x, grad_y, degree, bin_size):
     """
-     Returns oriented gradient of given degree, binned
-    """
+    Returns the oriented gradient channel.
 
+    :param grad_x: Gradient computed only for X axis.
+    :param grad_y: Gradient computed only for Y axis.
+    :param degree: Degree of the edge to be calculated
+    :param bin_size: Degree margin for which the edges to be calculated.
+
+    For example, if degree is '30' and bin size is '10', this routine computes edges for the degree interval 20 to 40.
+    """
     assert grad_x.shape == grad_y.shape
 
     lower_bound = degree - bin_size
@@ -40,7 +51,7 @@ def get_channels(image):
         - 6 gradient orientation channels
         - gradient magnitude
         - L, U and V channels of cieLUV
-    in order.
+    in this order.
     """
 
     channels = [None for i in range(10)]
@@ -81,6 +92,11 @@ def get_channels(image):
 
 
 def get_integral_channels(channels):
+    """
+    Transforms the computed channels into integral channels.
+    :param channels: Regular channels.
+    :return: Integral channels.
+    """
     int_chn = map(lambda it: cv2.integral(it), channels)
     return int_chn
 
