@@ -1,3 +1,9 @@
+#! -*- coding: UTF-8 -*-
+
+"""
+Miscellaneous helper functions.
+"""
+
 import cv2
 
 from constants import *
@@ -13,6 +19,12 @@ def show(image):
 
 
 def get_class(class_no):
+    """
+    Get the superclass of a traffic sign class
+    :param class_no: Number of the class.
+    :return: Number of the superclass.
+    """
+
     if class_no in PROHIBITORY:
         return PROHIBITORY_CLASS
     elif class_no in MANDATORY:
@@ -24,6 +36,16 @@ def get_class(class_no):
 
 
 def slide(image, initial_size, step_size, scaling_factor, scaling_iteration):
+    """
+    A sliding window implementation.
+
+    :param image: The image to be traversed.
+    :param initial_size: Initial size of the sliding window rectangle.
+    :param step_size: How many pixels to be skipped in each step, in pixels.
+    :param scaling_factor: Scale the rectangle by factor of this after the window fully traverses the image.
+    :param scaling_iteration: Do the aforementioned scaling this times.
+    :returns Generated subimages.
+    """
     dim_y, dim_x = image.shape[0], image.shape[1]
     size_x, size_y = initial_size
 
