@@ -1,3 +1,19 @@
+#! -*- coding: UTF-8 -*-
+
+"""
+A feature stub can be thought as the "blueprint" of the features.
+
+Recall that one particular feature dimension is described as:
+    * Channel Number
+    * X coordinate of upperleft point of the box
+    * Y coordinate of upperleft point of the box
+    * Height
+    * Width
+
+A feature is essentially a 5-tuple, carrying the information given above. This module is concerned with generation,
+serialization and deserialization of these feature tuples.
+"""
+
 from misc.constants import *
 import random
 
@@ -9,16 +25,15 @@ MIN_SIZE = 5
 
 COLLISION_LIMIT = 500
 
-# Description of feature vector:
-#   Channel Number
-#   X coordinate of upper left point of the box
-#   Y coordinate of upper left point of the box
-#   Height
-#   Width
-
 
 def generate(seed_value=None, uniq_features=None):
+    """
+    Generates feature stubs.
 
+    :param seed_value: Seed value for the random number generation. May be used for reproducible feature stubs.
+    :param uniq_features: Number of unique features to be generated.
+    :return: Generated feature stub.
+    """
     if not uniq_features:
         uniq_features = UNIQUE_FEATURE_COUNT
 
@@ -53,6 +68,11 @@ def generate(seed_value=None, uniq_features=None):
 
 
 def read(filename):
+    """
+    Reads the feature stub file.
+    :param filename: Name of the file to be read.
+    :return: Read feature stub.
+    """
     with open(filename, 'r') as fil:
         data = fil.read()
         data = data.split('\n')
@@ -64,6 +84,13 @@ def read(filename):
 
 
 def write(stubs, filename):
+    """
+    Writes the stub set to file.
+
+    :param stubs:       The stub set.
+    :param filename:    Name of the file to be written.
+    :return: Nothing.
+    """
     with open(filename, 'w') as fil:
         for stu in stubs:
             fea = '%s %s %s %s %s\n' % (stu[0], stu[1], stu[2], stu[3], stu[4])
